@@ -1,0 +1,989 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Embedded Linux &amp; Open hardware &mdash; The Linux Academy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="_static/cloud.js"></script>
+    <link rel="top" title="The Linux Academy 1.0 documentation" href="index.html" />
+    <link rel="prev" title="Embedded Linux" href="index.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="relbar-top">
+        
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Embedded Linux"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">The Linux Academy 1.0 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="embedded-linux-open-hardware">
+<h1>Embedded Linux &amp; Open hardware<a class="headerlink" href="#embedded-linux-open-hardware" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="embedded-linux-el">
+<h2>Embedded Linux(EL)<a class="headerlink" href="#embedded-linux-el" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-is-embedded-linux">
+<h3>What is Embedded Linux ?<a class="headerlink" href="#what-is-embedded-linux" title="Permalink to this headline">¶</a></h3>
+<p>Embedded Linux is the use of Linux in embedded computer systems such as mobile
+phones, personal digital assistants (PDA), media players, set-top boxes, and
+other consumer electronics devices, networking equipment, machine control,
+industrial automation, navigation equipment and medical instruments. (Wiki)</p>
+<p>Practically <em>EL</em> devices are no different from any regular desktop Linux,
+except the fact that most of the input/output, sound/video/graphics components
+are embedded in one IC(integrated circuit), also known as System on Chip(SoC).</p>
+</div>
+<div class="section" id="why-embedded-linux">
+<h3>Why Embedded Linux ?<a class="headerlink" href="#why-embedded-linux" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Linux is a free software(free as freedom), it supports large variants of
+embedded processors.</li>
+<li>Linux can be optimized to run on any low profile hardware(with 5MB ROM/RAM),
+as resources can be easily configured using userspace scripts.</li>
+<li>The kernel device drivers are modular, and can be loaded at runtime without restarting OS.</li>
+<li>The most of the core kernel code is architecture independent, so it is easy to add support for
+new processor.</li>
+<li>There is no fee, no renewals, no hidden clauses</li>
+</ul>
+<p>The production cost per <em>SoC</em> has now become as low as 10$, which enables low
+cost embedded Linux devices. Android is also an embedded Linux device.</p>
+</div>
+<div class="section" id="arm-based-embedded-linux">
+<h3>ARM based Embedded Linux<a class="headerlink" href="#arm-based-embedded-linux" title="Permalink to this headline">¶</a></h3>
+<p><strong>ARM (Advanced RISC Machines)</strong> is the most actively developed, low cost, low
+power embedded processor available in both 32bit &amp; 64bit versions. ARM based
+SoCs are manufactured by Samsung, Texas Instruments, ATMEL, NVIDIA, Apple,
+Qualcomm and more.</p>
+<p>Beyond ARM, the other notable embedded processors are SUN-SPARC, MIPS, PowerPC,
+Zilog, AVR, and more.</p>
+<p>We will install toolchain and perform development for ARM processors only.
+Similar approach can be adopted for any other architectures too.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><strong>Layman comparision of ARM &amp; x86 (2013 approximate price)</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="24%" />
+<col width="39%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Entity</th>
+<th class="head">x86(i3)</th>
+<th class="head">ARM(Cortex-A8)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Processor/SoC</td>
+<td>107$</td>
+<td>11$</td>
+</tr>
+<tr class="row-odd"><td>RAM(1GB/DDR3)</td>
+<td>15$</td>
+<td>5$</td>
+</tr>
+<tr class="row-even"><td>ROM(SSD/NAND)</td>
+<td>60$(60G)</td>
+<td>4$(4G)</td>
+</tr>
+<tr class="row-odd"><td>Graphics</td>
+<td>20$</td>
+<td>NA</td>
+</tr>
+<tr class="row-even"><td>Power usage</td>
+<td>high</td>
+<td>low</td>
+</tr>
+<tr class="row-odd"><td>Size(Board)</td>
+<td>10&#8221;x10&#8221;</td>
+<td>4&#8221;x2&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>Today, it is cheaper to deploy a quad core ARM based web-server than its x86
+counterpart. With better speed, small size  &amp; low power consumption, ARM boards
+are turning out to be real threat for desktop processors.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><strong>ARM architecture based Open hardware Embedded Linux boards</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="54%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Board name</th>
+<th class="head">Company / ARM type / Core(s)</th>
+<th class="head">Approximate Price</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Raspberry-Pi</td>
+<td>Broadcom BCM2835, ARM11, 1</td>
+<td>25$</td>
+</tr>
+<tr class="row-odd"><td>BeagleBone(B)</td>
+<td>TI OMAP 3, Cortex-A8, 1</td>
+<td>45$</td>
+</tr>
+<tr class="row-even"><td>PandaBoard</td>
+<td>TI OMAP 4, Cortex-A9, 2</td>
+<td>182$</td>
+</tr>
+<tr class="row-odd"><td>WandBoard</td>
+<td>Freescale, Cortex-A9, 1,2,4</td>
+<td>79$ (1 core)</td>
+</tr>
+<tr class="row-even"><td>Cubieboard2</td>
+<td>Allwinner A-20, Cortex-A7, 2</td>
+<td>59$</td>
+</tr>
+<tr class="row-odd"><td>A13-OLINUXINO</td>
+<td>Allwinner A-13(Aakash), Cortex-A8, 1</td>
+<td>47$</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><strong>Companies using ARM architecture</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="18%" />
+<col width="45%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Company</th>
+<th class="head">SoC Name</th>
+<th class="head">Notable products</th>
+<th class="head">ARM type / Core(s)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Apple</td>
+<td>A4</td>
+<td>iPhone4, iPad(1G), AppleTV(2G)</td>
+<td>Cortex-A8, 1</td>
+</tr>
+<tr class="row-odd"><td>Apple</td>
+<td>A5</td>
+<td>iPhone4S, iPad2, AppleTV(3G)</td>
+<td>Cortex-A9, 2</td>
+</tr>
+<tr class="row-even"><td>Apple</td>
+<td>A7</td>
+<td>iPhone5s</td>
+<td>Cortex-A7, 64bit</td>
+</tr>
+<tr class="row-odd"><td>Samsung</td>
+<td>Exynos 3 Single</td>
+<td>Samsung Galaxy S, Galaxy Nexus S</td>
+<td>Cortex-A8, 1</td>
+</tr>
+<tr class="row-even"><td>Samsung</td>
+<td>Exynos 4 Dual</td>
+<td>Samsung Galaxy SII, Samsung Galaxy Note</td>
+<td>Cortex-A9, 2</td>
+</tr>
+<tr class="row-odd"><td>Samsung</td>
+<td>Exynos 4 Quad</td>
+<td>Samsung Galaxy SIII</td>
+<td>Cortex-A9. 4</td>
+</tr>
+<tr class="row-even"><td>Nvidia</td>
+<td>Tegra</td>
+<td>Microsoft Zune HD</td>
+<td>ARM11, 1</td>
+</tr>
+<tr class="row-odd"><td>Nvidia</td>
+<td>Tegra 2</td>
+<td>ASUS Transformer, GalaxyTab 10.1</td>
+<td>Cortex-A9, 2</td>
+</tr>
+<tr class="row-even"><td>Nvidia</td>
+<td>Tegra 3</td>
+<td>ASUS Nexus 7, HTC One X</td>
+<td>Cortex-A9, 4</td>
+</tr>
+<tr class="row-odd"><td>Qualcomm</td>
+<td>Snapdragon S2</td>
+<td>Nokia Lumia 900</td>
+<td>NA, 1</td>
+</tr>
+<tr class="row-even"><td>Qualcomm</td>
+<td>Snapdragon S3</td>
+<td>HP TouchPad</td>
+<td>NA, 2</td>
+</tr>
+<tr class="row-odd"><td>Qualcomm</td>
+<td>Snapdragon S4</td>
+<td>HTC EVO 4G LTE</td>
+<td>NA, 2</td>
+</tr>
+<tr class="row-even"><td>TI</td>
+<td>Omap 3</td>
+<td>Barnes and Noble Nook Color</td>
+<td>Cortex-A8, 1</td>
+</tr>
+<tr class="row-odd"><td>TI</td>
+<td>Omap 4</td>
+<td>KindleFire,GalaxyTab 2,Blackberry Playbook</td>
+<td>Cortex-A9, 2</td>
+</tr>
+<tr class="row-even"><td>TI</td>
+<td>Omap 5</td>
+<td>NA</td>
+<td>Cortex-A15, 2</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="boot-sequence-in-linux">
+<h2>Boot sequence in Linux<a class="headerlink" href="#boot-sequence-in-linux" title="Permalink to this headline">¶</a></h2>
+<p><strong>The steps involved in Linux boot process (x86 and ARM) :</strong></p>
+<ol class="arabic">
+<li><p class="first"><strong>BIOS (assembly &amp; C)</strong> - is the first program run by x86 based motherboard. ARM boards do
+not have BIOS, but each SoC has its own program to verify the on-board peripherals
+after power on.</p>
+<p>This BIOS equivalent program in EL is mostly hardcoded in SoCs, hence updating them
+is usually not possible in case of embedded devices.</p>
+<p>The purpose of this stage is to check the integrety of peripherals connected,
+if found OK, it will look for <cite>bootloader</cite> application in first boot-able device.</p>
+</li>
+<li><p class="first"><strong>Bootloader (C &amp; assembly)</strong> - is used to copy and uncompress <em>kernel</em> to RAM from a given
+location. GRUB(GRand Unified Bootloader) is the popular bootloader for desktop
+Linux machines.</p>
+<p>Embedded Linux uses <a class="reference external" href="http://www.denx.de/wiki/U-Boot/">U-Boot</a> bootloader.</p>
+</li>
+<li><p class="first"><strong>Kernel (C &amp; assembly)</strong> - again probes all connected hardware and initializes
+them systematically. At the end of the kernel stage, it calls <em>init</em> process
+from filesystem to initialize user space scripts and startup jobs.</p>
+</li>
+<li><p class="first"><strong>Initrd (initial ramdisk)</strong> - is an optional scheme for loading a temporary
+root file system containing device drivers into memory in the boot process of
+the Linux kernel.</p>
+</li>
+<li><p class="first"><strong>File-system</strong> - is the last stage of boot process, it contains <em>glibc</em> and
+other architecture specific shared libraries to run user space applications.</p>
+<p>Filesystem optionally may contains X-server which provides graphical desktop
+environment such as GNOME, KDE etc.</p>
+</li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="setting-up-development-environment">
+<h2>Setting up development environment<a class="headerlink" href="#setting-up-development-environment" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="software-requirements">
+<h3>Software requirements<a class="headerlink" href="#software-requirements" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">In Ubuntu 12.04+, issue the below command to install cross compiler</p>
+<div class="highlight-python"><pre>sudo apt-get install gcc-arm-linux-gnueabihf</pre>
+</div>
+</li>
+<li><p class="first">Install dependencies for kernel and u-boot compilation</p>
+<div class="highlight-python"><pre>sudo apt-get install build-essential dpkg-dev kernel-wedge make automake\
+checkinstall git u-boot-tools</pre>
+</div>
+</li>
+<li><p class="first">Install <tt class="docutils literal"><span class="pre">qemu-user-static</span></tt> for setting up chroot based ARM virtualization to
+install packages in ARM-fileystem</p>
+<div class="highlight-python"><pre>sudo apt-get install qemu-user-static</pre>
+</div>
+</li>
+<li><p class="first">If you have serial console (Rx, Tx) lines from the board/tablet, then to
+view console output install <em>minicom</em> (optional)</p>
+<div class="highlight-python"><pre>sudo apt-get install minicom</pre>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="hardware-requirements">
+<h3>Hardware requirements<a class="headerlink" href="#hardware-requirements" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>A development board such as R-pi, beagleboard, cubieboard or Aakash tablet</li>
+<li>An sdcard of 2 GB or above</li>
+<li>USB hub, keyboard and mouse (optional)</li>
+<li>Serial(Rx,Tx) cable, and USB to serial convertor (optional, for debugging)</li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="preparing-u-boot-kernel-filesystem">
+<h2>Preparing U-boot, kernel &amp; filesystem<a class="headerlink" href="#preparing-u-boot-kernel-filesystem" title="Permalink to this headline">¶</a></h2>
+<p>At the end of this stage you will have a bootable sdcard with your custom
+embedded Linux.</p>
+<p>For those who want to try Linux on Aakash now, can download this sdcard
+<a class="reference external" href="http://www.it.iitb.ac.in/AakashApps/repo/GNU-Linux-on-Aakash/13.10_2GB_24_09_2013.img.bz2">image</a></p>
+<p>Insert the sdcard and umount</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">umount</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">sdX</span>
+</pre></div>
+</div>
+<p>Untar the file and <tt class="docutils literal"><span class="pre">dd</span></tt> it to sdcard</p>
+<div class="highlight-python"><pre>sudo dd if=13.10_2GB_24_09_2013.img of=/dev/sdX bs=1M count=2048</pre>
+</div>
+<div class="section" id="id1">
+<h3>U-Boot<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="compiling-u-boot">
+<h4>Compiling U-boot<a class="headerlink" href="#compiling-u-boot" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p class="first">Clone the repository by</p>
+<div class="highlight-python"><pre>git clone -b sunxi https://github.com/androportal/uboot-allwinner.git \
+ --depth=1</pre>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">cd</span></tt> into <tt class="docutils literal"><span class="pre">uboot-allwinner</span></tt></p>
+<div class="highlight-python"><pre>cd uboot-allwinner</pre>
+</div>
+</li>
+<li><p class="first">To compile uboot issue</p>
+<div class="highlight-python"><pre>make a13_olinuxino CROSS_COMPILE=arm-linux-gnueabihf-</pre>
+</div>
+</li>
+<li><p class="first">After successful compilation <tt class="docutils literal"><span class="pre">u-boot.bin</span></tt> will be available at root of the
+directory and <tt class="docutils literal"><span class="pre">sunxi-spl.bin</span></tt> will be in <tt class="docutils literal"><span class="pre">spl</span></tt> directory</p>
+</li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="writing-u-boot-on-sdcard">
+<h4>Writing U-boot on sdcard<a class="headerlink" href="#writing-u-boot-on-sdcard" title="Permalink to this headline">¶</a></h4>
+<p><strong>SDCARD layout</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="23%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Start</th>
+<th class="head">size</th>
+<th class="head">usage</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>8KB</td>
+<td>Unused</td>
+</tr>
+<tr class="row-odd"><td>8</td>
+<td>24KB</td>
+<td>Initial SPL loader</td>
+</tr>
+<tr class="row-even"><td>32</td>
+<td>512KB</td>
+<td>u-boot</td>
+</tr>
+<tr class="row-odd"><td>544</td>
+<td>128KB</td>
+<td>environment</td>
+</tr>
+<tr class="row-even"><td>672</td>
+<td>352KB</td>
+<td>reserved</td>
+</tr>
+<tr class="row-odd"><td>1024</td>
+<td>&#8211;</td>
+<td>free for partitions</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic">
+<li><p class="first">Insert <tt class="docutils literal"><span class="pre">sdcard</span></tt> in card reader or MMC reader available in laptops/netbooks</p>
+</li>
+<li><p class="first">Backup all your sdcard data, and issue the following commands carefully, replace
+<em>X</em> in /dev/sdX with suitable letter(a lower case alphabet) alloted for your
+sdcard, remember <em>X</em> will never be <em>a</em> if you have a hard disk installed, so keep
+in mind it must be something like <tt class="docutils literal"><span class="pre">/dev/sdb</span></tt> or <tt class="docutils literal"><span class="pre">/dev/sdc</span></tt> etc. Please check
+twice and if you are still unsure then do not perform these steps</p>
+<div class="highlight-python"><pre>sudo fdisk -u=sectors /dev/sdX</pre>
+</div>
+</li>
+<li><p class="first">First clear the previous u-boot and its configurations, if any:</p>
+<div class="highlight-python"><pre>sudo dd if=/dev/zero of=/dev/sdX bs=1024 seek=544 count=128</pre>
+</div>
+</li>
+<li><p class="first">Now from same <tt class="docutils literal"><span class="pre">uboot-allwinner</span></tt> directory issue these commands, again replace
+X with suitable value, now to write <tt class="docutils literal"><span class="pre">sunxi-spl.bin</span></tt> to sdcard issue:</p>
+<div class="highlight-python"><pre>sudo dd if=spl/sunxi-spl.bin of=/dev/sdX bs=1024 seek=8</pre>
+</div>
+<p>Similarly to burn <tt class="docutils literal"><span class="pre">u-boot.bin</span></tt> issue</p>
+<div class="highlight-python"><pre>sudo dd if=u-boot.bin of=/dev/sdX bs=1024 seek=32</pre>
+</div>
+</li>
+</ol>
+<p>At this point we have a bootable sdcard readly. Get kernel and rootfs to make a usuable
+Linux for your tablet.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="kernel">
+<h3>Kernel<a class="headerlink" href="#kernel" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="compiling-kernel">
+<h4>Compiling Kernel<a class="headerlink" href="#compiling-kernel" title="Permalink to this headline">¶</a></h4>
+<p>Kernel compilation steps are same for</p>
+<ol class="arabic">
+<li><p class="first">Clone the repository by</p>
+<div class="highlight-python"><pre>git clone https://github.com/androportal/linux-sunxi.git</pre>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">cd</span></tt> into <tt class="docutils literal"><span class="pre">linux-sunxi</span></tt></p>
+<div class="highlight-python"><pre>cd linux-sunxi</pre>
+</div>
+</li>
+<li><p class="first">Checkout to desired branch, it this case <tt class="docutils literal"><span class="pre">sunxi-3.0</span></tt>:</p>
+<div class="highlight-python"><pre>git checkout sunxi-3.0</pre>
+</div>
+</li>
+<li><p class="first">You may use the existing <a class="reference external" href="https://raw.github.com/androportal/linux-sunxi/sunxi-3.0/.config">.config</a> file
+to compile the kernel for Aakash, or customize it using standard procedures.</p>
+<p><tt class="docutils literal"><span class="pre">.config</span></tt> contains all settings and modules information set by user for specific hardware. This will
+differ from board to board. A <tt class="docutils literal"><span class="pre">.config</span></tt> file is autogenerated and can be customized later by following
+commands.
+The next command will create a default <tt class="docutils literal"><span class="pre">.config</span></tt> for A13(Aakash) board, do not run the next command
+if you have already downloaded the <tt class="docutils literal"><span class="pre">.config</span></tt> file from above link, otherwise it will overwrite without
+any warning</p>
+<div class="highlight-python"><pre>make ARCH=arm a13_defconfig</pre>
+</div>
+</li>
+<li><p class="first">To customize or view the settings you may run the following command(optional)</p>
+<div class="highlight-python"><pre>make ARCH=arm menuconfig</pre>
+</div>
+<img alt="_images/menuconfig.png" src="_images/menuconfig.png" style="width: 100%;" />
+<p>To search any module or setting use <tt class="docutils literal"><span class="pre">'/'</span></tt></p>
+<img alt="_images/search.png" src="_images/search.png" style="width: 100%;" />
+<p>To get module help use <tt class="docutils literal"><span class="pre">'?'</span></tt> when selected</p>
+<img alt="_images/module-help.png" src="_images/module-help.png" style="width: 100%;" />
+<p>Use space-bar to toggle <tt class="docutils literal"><span class="pre">'M'</span></tt> (as module) or <tt class="docutils literal"><span class="pre">'*'</span></tt> (build in kernel)</p>
+<img alt="_images/modules-selection.png" src="_images/modules-selection.png" style="width: 100%;" />
+<p>Use arrow keys to select <tt class="docutils literal"><span class="pre">exit</span></tt>, and choose <tt class="docutils literal"><span class="pre">yes</span></tt> to save the new <tt class="docutils literal"><span class="pre">.config</span></tt> file</p>
+<img alt="_images/config-save.png" src="_images/config-save.png" style="width: 100%;" />
+</li>
+<li><p class="first">Now to compile kernel issue</p>
+<div class="highlight-python"><pre>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage</pre>
+</div>
+</li>
+<li><p class="first">To make kernel modules</p>
+<div class="highlight-python"><pre>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- \
+INSTALL_MOD_PATH=out modules</pre>
+</div>
+</li>
+<li><p class="first">To install modules in right path</p>
+<div class="highlight-python"><pre>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=out \
+modules_install</pre>
+</div>
+</li>
+<li><p class="first">After successful compilation <tt class="docutils literal"><span class="pre">uImage</span></tt> will be available at <tt class="docutils literal"><span class="pre">arch/arm/boot/uImage</span></tt> and
+also find <tt class="docutils literal"><span class="pre">script.bin</span></tt> in the root of the directory(This section is subject to change), the
+kernel modules are available at <tt class="docutils literal"><span class="pre">out/lib/modules/3.0.76+/</span></tt></p>
+</li>
+</ol>
+</div>
+<div class="section" id="copying-kernel-to-sdcard">
+<h4>Copying kernel to sdcard<a class="headerlink" href="#copying-kernel-to-sdcard" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p class="first">Insert <tt class="docutils literal"><span class="pre">sdcard</span></tt> in card reader or MMC reader available in laptops/netbooks</p>
+</li>
+<li><p class="first">Backup all your sdcard data, and issue the following commands carefully, replace
+<em>X</em> in /dev/sdX with suitable letter(a lower case alphabet) alloted for your
+sdcard, remember <em>X</em> will never be <em>a</em> if you have a hard disk installed, so keep
+in mind it must be something like <tt class="docutils literal"><span class="pre">/dev/sdb</span></tt> or /<tt class="docutils literal"><span class="pre">dev/sdc</span></tt> etc. Please check
+twice and if you are still unsure leave this README right now otherwise you may
+end up with non bootable machine:</p>
+<div class="highlight-python"><pre>sudo fdisk -u=sectors /dev/sdX</pre>
+</div>
+</li>
+<li><p class="first">Then create partition for kernel and filesystem in your sdcard, from
+inside <tt class="docutils literal"><span class="pre">fdisk</span></tt> prompt type <tt class="docutils literal"><span class="pre">p</span></tt> to list all partitions</p>
+<div class="highlight-python"><pre>Command (m for help): p</pre>
+</div>
+</li>
+<li><p class="first">Now press <tt class="docutils literal"><span class="pre">d</span></tt> to delete your partition. If you have multiple partitions use partition number
+to delete each partition as shown by fdisk utility:</p>
+<div class="highlight-python"><pre>Command (m for help): d</pre>
+</div>
+</li>
+<li><p class="first">Type <tt class="docutils literal"><span class="pre">n</span></tt> for new partion(hit enter) and then mention <tt class="docutils literal"><span class="pre">p</span></tt> for primary partition, hit
+enter to continue with default starting sector(2048), enter again for last sector and
+mention <tt class="docutils literal"><span class="pre">+16M</span></tt>, this partition will be later formatted with vfat for kernel:</p>
+<div class="highlight-python"><pre>Command (m for help): n
+Partition type:
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended
+Select (default p): p
+Partition number (1-4, default 1):
+Using default value 1
+First sector (2048-7744511, default 2048):
+Using default value 2048
+Last sector, +sectors or +size{K,M,G} (2048-7744511, default 7744511): +16M</pre>
+</div>
+</li>
+<li><p class="first">The sdcard is assumed to be 4gb size, similarly create 2nd primary partition
+using remaining disk space which will serve as filesystem:</p>
+<div class="highlight-python"><pre>Command (m for help): n
+Partition type:
+   p   primary (1 primary, 0 extended, 3 free)
+   e   extended
+Select (default p): p
+Partition number (1-4, default 2):
+Using default value 2
+First sector (34816-7744511, default 34816):
+Using default value 34816
+Last sector, +sectors or +size{K,M,G} (34816-7744511, default 7744511):
+Using default value 7744511</pre>
+</div>
+</li>
+<li><p class="first">(Optional) If you intend to use <tt class="docutils literal"><span class="pre">swap</span></tt> partion, leave atleast ~300MB in
+previous step and create a 3rd primary partition.</p>
+</li>
+<li><p class="first">Now as we have created 2 primary partitions now let&#8217;s write(w) the changes
+to disk. For that issue:</p>
+<div class="highlight-python"><pre>Command (m for help): w</pre>
+</div>
+</li>
+<li><p class="first">As partition is completed, we need to format them respectively, the first
+partition must be vfat so that uboot can read kernel:</p>
+<div class="highlight-python"><pre>sudo mkfs.vfat /dev/sdX1</pre>
+</div>
+<p>For rootfs, create ext4 partition:</p>
+<div class="highlight-python"><pre>sudo mkfs.ext4  /dev/sdX2</pre>
+</div>
+</li>
+<li><p class="first">Now mount vfat partition to some mount point(directory):</p>
+<div class="highlight-python"><pre>sudo mount -t vfat /dev/sdX1 /mnt/boot</pre>
+</div>
+<p>copy kernel to <tt class="docutils literal"><span class="pre">/mnt/boot</span></tt>, assuming that you are still in <tt class="docutils literal"><span class="pre">linux-sunxi</span></tt> directory:</p>
+<div class="highlight-python"><pre>sudo cp arch/arm/boot/uImage /mnt/boot</pre>
+</div>
+<p>Also copy <tt class="docutils literal"><span class="pre">script.bin</span></tt> to same directory(script.bin must be extracted from android
+partition)</p>
+<div class="highlight-python"><pre>sudo cp script.bin /mnt/boot</pre>
+</div>
+<p>Now, umount /mnt/boot, before that you may want to <tt class="docutils literal"><span class="pre">sync</span></tt> so that any
+remaining buffers are written to disks:</p>
+<div class="highlight-python"><pre>sudo sync</pre>
+</div>
+<p>Finally unmount:</p>
+<div class="highlight-python"><pre>sudo umount /mnt/boot</pre>
+</div>
+</li>
+</ol>
+<p>At this point we have a sdcard ready with kernel. Copy rootfs
+to make a usuable Linux for your hardware.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="filesystem">
+<h3>Filesystem<a class="headerlink" href="#filesystem" title="Permalink to this headline">¶</a></h3>
+<p>As of now we have uboot and kernel ready, the next step is to run applications, to
+do so we need Linux file system. One can use any distribuition from here after.
+For this session we will use ubuntu 13.10 daily build. You can upgrade to stable
+13.10 later.</p>
+<p>We will use LXDE, as it is almost 50% lighter &amp; twice as faster than any other
+desktop environment.</p>
+<div class="section" id="setting-up-arm-chroot">
+<h4>Setting up ARM chroot<a class="headerlink" href="#setting-up-arm-chroot" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p class="first">Insert sdcard again, download the core ubuntu 13.10 image from this <a class="reference external" href="http://cdimage.ubuntu.com/ubuntu-core/daily/current/saucy-core-armhf.tar.gz">link</a> and save it in say <cite>/tmp</cite> directory. Extract the tar file in your sdcard&#8217;s ext4 partition</p>
+<div class="highlight-python"><pre>cd /media/&lt;ext4 partition of sdcard&gt;</pre>
+</div>
+<p>Now extract core ubuntu file system</p>
+<div class="highlight-python"><pre>sudo tar -xvpzhf /tmp/saucy-core-armhf.tar.gz</pre>
+</div>
+</li>
+<li><p class="first">Copy the static qemu binary to mount arm fs in x86 architecture without invoking actual qemu emulator</p>
+<div class="highlight-python"><pre>sudo cp /usr/bin/qemu-arm-static /media/&lt;ext4 partion of sdcard&gt;/usr/bin/</pre>
+</div>
+</li>
+<li><p class="first">Now set up chroot environment manually or use the <cite>ch-mount.sh</cite> bash
+script given two steps below</p>
+<div class="highlight-python"><pre>sudo mount -t proc /proc /media/&lt;ext4 partion of sdcard&gt;/proc
+
+sudo mount -t sysfs /sys /media/&lt;ext4 partion of sdcard&gt;/sys
+
+sudo mount -o bind /dev /media/&lt;ext4 partion of sdcard&gt;/dev
+
+sudo mount -o bind /dev/pts /media/&lt;ext4 partion of sdcard&gt;/dev/pts</pre>
+</div>
+</li>
+<li><p class="first">chroot into the file system</p>
+<div class="highlight-python"><pre>sudo chroot /media/&lt;ext4 partition of sdcard&gt;/</pre>
+</div>
+</li>
+<li><p class="first">The above two steps can be combined together using a simple bash
+<a class="reference external" href="https://github.com/psachin/bash_scripts/blob/master/ch-mount.sh">ch-mount.sh</a>. From
+here onwards we will use this script to mount and un-mount
+fs. Please read this script to get any further help</p>
+<div class="highlight-python"><pre>sudo bash ch-mount.sh -m /media/&lt;ext4 partition of sdcard&gt;/</pre>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="updating-and-installing-packages">
+<h4>Updating and installing packages<a class="headerlink" href="#updating-and-installing-packages" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p class="first">Now we have a chroot environment with all <tt class="docutils literal"><span class="pre">proc,</span> <span class="pre">dev,</span> <span class="pre">sys,</span> <span class="pre">dev/pts</span></tt> mounted,
+so run update to fetch repository informations (as chroot has root prompt so
+no need to write sudo anymore)</p>
+<div class="highlight-python"><pre>apt-get update</pre>
+</div>
+</li>
+<li><p class="first">Open <tt class="docutils literal"><span class="pre">/media/&lt;ext4</span> <span class="pre">partition</span> <span class="pre">of</span> <span class="pre">sdcard&gt;/etc/apt/sources.list</span></tt> in texteditor and replace the content with following</p>
+<div class="highlight-python"><pre>deb http://ports.ubuntu.com/ubuntu-ports/ saucy main universe
+deb http://ports.ubuntu.com/ubuntu-ports/ saucy multiverse restricted
+deb-src http://ports.ubuntu.com/ubuntu-ports/ saucy main universe
+deb-src http://ports.ubuntu.com/ubuntu-ports/ saucy multiverse restricted</pre>
+</div>
+</li>
+<li><p class="first">Now install english language pack to avoid locale related errors</p>
+<div class="highlight-python"><pre>apt-get install language-pack-en-base</pre>
+</div>
+</li>
+<li><p class="first">Now install minimal X environment to test our setup</p>
+<div class="highlight-python"><pre>apt-get install vim.tiny sudo ssh net-tools ethtool wireless-tools lxde \
+ xfce4-power-manager xinit xorg network-manager iputils-ping \
+ florence rsyslog alsa-utils gnome-mplayer \</pre>
+</div>
+</li>
+<li><p class="first">Few optional recommended packages for system utilities(lxtask, lxproxy and htop)</p>
+<div class="highlight-python"><pre>apt-get install bash-completion lxtask htop \
+python-central python-gobject-2 python-gtk2 synaptic\</pre>
+</div>
+<p>Download <a class="reference external" href="http://zevenos.com/files/lxproxy_0.1ubuntu3_all.deb">lxproxy</a> and install using dpkg:</p>
+<div class="highlight-python"><pre>dpkg -i lxproxy_0.1ubuntu3_all.deb</pre>
+</div>
+</li>
+<li><p class="first">Few more optional packages for office suite, arduino development and pcb designing (testing purpuse):</p>
+<div class="highlight-python"><pre>apt-get install libreoffice python-gnome2 python-gconf python-serial\
+python-gtksourceview2 gcc-avr  binutils-avr  avr-libc avrdude python-xdg</pre>
+</div>
+<p>Download  <a class="reference external" href="https://launchpad.net/~pmjdebruijn/+archive/gnoduino-release/+files/gnoduino_0.4.0-0pmjdebruijn4%7Eprecise_all.deb">gnoduiono</a> and install using dpkg:</p>
+<div class="highlight-python"><pre>dpkg -i gnoduino_0.4.0-0pmjdebruijn4~precise_all.deb</pre>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="user-permissions-and-startup-jobs">
+<h4>User permissions and startup jobs<a class="headerlink" href="#user-permissions-and-startup-jobs" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p class="first">Add user and set permissions</p>
+<div class="highlight-python"><pre>adduser aakash &amp;&amp; addgroup aakash adm &amp;&amp; addgroup aakash sudo &amp;&amp; \
+addgroup aakash audio</pre>
+</div>
+</li>
+<li><p class="first">Open <tt class="docutils literal"><span class="pre">/etc/hostname</span></tt> file in vim.tiny editor and give a hostname, for example
+write <tt class="docutils literal"><span class="pre">aakash-arm</span></tt></p>
+</li>
+<li><p class="first">Similarly open <tt class="docutils literal"><span class="pre">/etc/hosts</span></tt> and remove its content and add these two lines:</p>
+<div class="highlight-python"><pre>127.0.0.1    localhost
+127.0.1.1    aakash-arm</pre>
+</div>
+</li>
+<li><p class="first">Open <tt class="docutils literal"><span class="pre">/etc/modules</span></tt> file and append these two lines</p>
+<div class="highlight-python"><pre>gt811_ts
+ft5x_ts
+ektf2k
+8192cu</pre>
+</div>
+</li>
+<li><p class="first">Add these lines in <tt class="docutils literal"><span class="pre">/etc/rc.local</span></tt> to activate swap at boot time(if using):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Added for Aakash, assuming the last partition will be swap</span>
+<span class="n">mkswap</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">mmcblk0p3</span>
+<span class="n">swapon</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">mmcblk0p3</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">To allow non root user to edit networking, change this file</p>
+<div class="highlight-python"><pre>/usr/share/polkit-1/actions/org.freedesktop.NetworkManager.policy
+
+look for this section:
+&lt;action id="org.freedesktop.NetworkManager.settings.modify.system"&gt;
+
+change &lt;allow_active&gt; to 'yes':
+&lt;defaults&gt;
+&lt;allow_inactive&gt;no&lt;/allow_inactive&gt;
+&lt;allow_active&gt;yes&lt;/allow_active&gt;
+&lt;/defaults&gt;
+&lt;/action&gt;</pre>
+</div>
+</li>
+<li><p class="first">Open <tt class="docutils literal"><span class="pre">/etc/lxdm/lxdm.conf</span></tt> and modify it for autologin. Change the autologin
+section in the top of the file to this</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">## uncomment and set autologin username to enable autologin</span>
+<span class="n">autologin</span><span class="o">=</span><span class="n">aakash</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Now open a new tab in your host Linux machine&#8217;s terminal and copy
+<tt class="docutils literal"><span class="pre">/&lt;path</span> <span class="pre">to</span> <span class="pre">linux</span> <span class="pre">kernel&gt;/linux-sunxi/out/lib/modules/3.0.76+/</span></tt> to your arm
+ubuntu setup</p>
+<div class="highlight-python"><pre>sudo cp -r /&lt;path to linux kernel&gt;/linux-sunxi/out/lib/modules/3.0.76+/ \
+/media/&lt;ext4 partition of sdcard&gt;/lib/modules/</pre>
+</div>
+</li>
+<li><p class="first">Download rtl8192cufw.bin from this
+<a class="reference external" href="http://mirrors.arizona.edu/raspbmc/downloads/bin/lib/wifi/rtlwifi/">page</a>,
+and create a directory as <tt class="docutils literal"><span class="pre">/lib/firmware/rtlwifi</span></tt> in ubuntu chroot, copy
+<tt class="docutils literal"><span class="pre">rtl8192cufw.bin</span></tt> inside <tt class="docutils literal"><span class="pre">rtlwifi</span></tt> directory</p>
+</li>
+<li><p class="first">By now we have basic elements set to give a trial run to our OS. Type
+<tt class="docutils literal"><span class="pre">exit</span></tt> in chroot environment to get back to Ubuntu x86 host prompt, now
+run un-mount script</p>
+<div class="highlight-python"><pre>sudo bash ch-mount.sh -u /media/&lt;ext4 partition of sdcard&gt;/</pre>
+</div>
+<p>unmount both the partitions (fat32 and ext4) from your machine, confirm with
+<tt class="docutils literal"><span class="pre">mount</span></tt> command to check nothing from sdcard is mounted</p>
+</li>
+</ol>
+<p>Remove the sdcard and insert it in your tablet, power on to get ubuntu 13.10 lxde desktop.</p>
+<p>The default login is <tt class="docutils literal"><span class="pre">aakash</span></tt>. If you unable to <cite>logout</cite> or <cite>shutdown</cite>,
+then you must set the following as root</p>
+<div class="highlight-python"><pre>chmod u+s /usr/bin/lxsession-logout</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="debugging">
+<h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="u-boot-access-using-minicom">
+<h3>U-boot access using minicom<a class="headerlink" href="#u-boot-access-using-minicom" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">Minicom</span></tt> is a serial communication program, its used to access serial console
+at certain baudrate us Rx &amp; Tx lines. The serial console redirects the output
+of embedded Linux device to minicom. Mostly embedded devices do not have display
+units, hence serial debugging is one of the widely used practice.</p>
+<div class="section" id="minicom-setup">
+<h4>Minicom setup<a class="headerlink" href="#minicom-setup" title="Permalink to this headline">¶</a></h4>
+<p>Set the proper baud rate and port. The baud rate could be <tt class="docutils literal"><span class="pre">115200</span></tt> in most cases,
+if not check the manual of the SoC.</p>
+<p>Run</p>
+<div class="highlight-python"><pre>sudo minicom -s</pre>
+</div>
+<p>and then navigate to <tt class="docutils literal"><span class="pre">Serial</span> <span class="pre">port</span> <span class="pre">setup</span></tt> and change settings to match as shown below,
+hit enter to exit, then <tt class="docutils literal"><span class="pre">Save</span> <span class="pre">setup</span> <span class="pre">as</span> <span class="pre">dfl</span></tt>.</p>
+<img alt="_images/minicom-setup.png" src="_images/minicom-setup.png" style="width: 100%;" />
+<p>Connect Rx, Tx lines to your embedded board and other end to your host laptop/desktop.</p>
+<img alt="_images/aakash-serial.jpg" src="_images/aakash-serial.jpg" style="width: 100%;" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Now run</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">minicom</span>
+</pre></div>
+</div>
+<p>and you should see scrolling U-boot and kernel logs. By default U-boot waits
+for user interrupt for 3 seconds. If interrupted it will drop into U-boot prompt, similar
+to this</p>
+<img alt="_images/uboot-prompt.png" src="_images/uboot-prompt.png" style="width: 100%;" />
+<p>You can type <tt class="docutils literal"><span class="pre">help</span></tt> to see all <cite>U-boot</cite> commands.</p>
+<p>To print default U-boot environment variables</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">printenv</span>
+</pre></div>
+</div>
+<img alt="_images/printenv.png" src="_images/printenv.png" style="width: 100%;" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>U-boot prompt can allow user to update kernel, load alternate kernel images,
+change the environment variables and lot more.</p>
+<p>Now to <tt class="docutils literal"><span class="pre">boot</span></tt> the kernel from U-boot prompt just run</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">boot</span>
+</pre></div>
+</div>
+<p>This will boot the default kernel set in U-boot environment.</p>
+</div>
+</div>
+<div class="section" id="kernel-debugging">
+<h3>Kernel debugging<a class="headerlink" href="#kernel-debugging" title="Permalink to this headline">¶</a></h3>
+<p>The kernel logs can be viewed in same minicom serial console. The logs provide
+important information about services and drivers. One can set loglevel to control
+the extent of debug info on screen.</p>
+<p>Developers usually insert <tt class="docutils literal"><span class="pre">printk</span></tt> statements in device drivers and check values of
+variables in kernel log. The better and efficient way to debug kernel is by using
+<tt class="docutils literal"><span class="pre">kdb</span></tt>. More on kdb can be found <a class="reference external" href="https://www.kernel.org/pub/linux/kernel/people/jwessel/kdb/">here</a></p>
+</div>
+</div>
+<div class="section" id="additional-tools-to-make-life-easy">
+<h2>Additional tools to make life easy<a class="headerlink" href="#additional-tools-to-make-life-easy" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ssh-scp">
+<h3>ssh &amp; scp<a class="headerlink" href="#ssh-scp" title="Permalink to this headline">¶</a></h3>
+<p>Setup an ssh server in your embedded Linux box and add your public key to have
+password less login (helps to load kernel images and modules faster)</p>
+</div>
+<div class="section" id="tftp-server">
+<h3>tftp server<a class="headerlink" href="#tftp-server" title="Permalink to this headline">¶</a></h3>
+<p>If your board supports ethernet cable then use this setup to transfer test builds.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><div class="sphinxlocaltoc">
+    <h3><a href="index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Embedded Linux &amp; Open hardware</a><ul>
+<li><a class="reference internal" href="#embedded-linux-el">Embedded Linux(EL)</a><ul>
+<li><a class="reference internal" href="#what-is-embedded-linux">What is Embedded Linux ?</a></li>
+<li><a class="reference internal" href="#why-embedded-linux">Why Embedded Linux ?</a></li>
+<li><a class="reference internal" href="#arm-based-embedded-linux">ARM based Embedded Linux</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#boot-sequence-in-linux">Boot sequence in Linux</a></li>
+<li><a class="reference internal" href="#setting-up-development-environment">Setting up development environment</a><ul>
+<li><a class="reference internal" href="#software-requirements">Software requirements</a></li>
+<li><a class="reference internal" href="#hardware-requirements">Hardware requirements</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#preparing-u-boot-kernel-filesystem">Preparing U-boot, kernel &amp; filesystem</a><ul>
+<li><a class="reference internal" href="#id1">U-Boot</a><ul>
+<li><a class="reference internal" href="#compiling-u-boot">Compiling U-boot</a></li>
+<li><a class="reference internal" href="#writing-u-boot-on-sdcard">Writing U-boot on sdcard</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#kernel">Kernel</a><ul>
+<li><a class="reference internal" href="#compiling-kernel">Compiling Kernel</a></li>
+<li><a class="reference internal" href="#copying-kernel-to-sdcard">Copying kernel to sdcard</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#filesystem">Filesystem</a><ul>
+<li><a class="reference internal" href="#setting-up-arm-chroot">Setting up ARM chroot</a></li>
+<li><a class="reference internal" href="#updating-and-installing-packages">Updating and installing packages</a></li>
+<li><a class="reference internal" href="#user-permissions-and-startup-jobs">User permissions and startup jobs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#debugging">Debugging</a><ul>
+<li><a class="reference internal" href="#u-boot-access-using-minicom">U-boot access using minicom</a><ul>
+<li><a class="reference internal" href="#minicom-setup">Minicom setup</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#kernel-debugging">Kernel debugging</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#additional-tools-to-make-life-easy">Additional tools to make life easy</a><ul>
+<li><a class="reference internal" href="#ssh-scp">ssh &amp; scp</a></li>
+<li><a class="reference internal" href="#tftp-server">tftp server</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="index.html"
+                          title="Previous page">&larr; Embedded Linux</a></p>
+  </div>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/embedded-linux.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Embedded Linux"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">The Linux Academy 1.0 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2014, Srikant Patnaik.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

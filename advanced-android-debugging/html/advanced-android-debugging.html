@@ -1,0 +1,464 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Advanced Android Debugging &mdash; The Linux Academy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="_static/cloud.js"></script>
+    <link rel="top" title="The Linux Academy 1.0 documentation" href="index.html" />
+    <link rel="prev" title="Advanced Android Debugging" href="index.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="relbar-top">
+        
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Advanced Android Debugging"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">The Linux Academy 1.0 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="advanced-android-debugging">
+<h1>Advanced Android Debugging<a class="headerlink" href="#advanced-android-debugging" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="debugging">
+<h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
+<p>Any piece of software or hardware ever designed must have gone through debug a
+process. Debug provides us a window to sneak into a running application.</p>
+<p>Android provides an excellent platform for debugging apk through eclipse IDE.</p>
+<p>However there is more of debugging for advanced users, which is quite useful and fast.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="installing-adb-and-setting-debugging-environment">
+<h2>Installing adb, and setting debugging environment<a class="headerlink" href="#installing-adb-and-setting-debugging-environment" title="Permalink to this headline">¶</a></h2>
+<p>If you have installed and setup android development enviroment for eclipse, then
+you have all the debugging tools with you.</p>
+<p>If not, you can install <em>adb</em> on Ubuntu-12.10 onwards by</p>
+<div class="highlight-python"><pre>sudo apt-get install android-tools-adb</pre>
+</div>
+<p>or you can download the entire Android-sdk(400 MB uncompressed) <a class="reference external" href="http://developer.android.com/sdk/index.html#download">here </a> and setup manually.</p>
+<p>or for a 32bit Linux machine, you may download it from this <a class="reference external" href="https://github.com/androportal/installer/raw/ics/adb">link </a> and make the
+binary as executable</p>
+<div class="highlight-python"><pre>chmod +x adb</pre>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="setting-udev-rules-for-adb-to-run-as-a-normal-user">
+<h3>Setting udev rules for adb to run as a normal user<a class="headerlink" href="#setting-udev-rules-for-adb-to-run-as-a-normal-user" title="Permalink to this headline">¶</a></h3>
+<p>Set udev rules for android usb in <cite>/etc/udev/rules.d/51-android.rules</cite>, open
+terminal and do</p>
+<div class="highlight-python"><pre>sudo gedit /etc/udev/rules.d/51-android.rules</pre>
+</div>
+<p>and enter these two rules</p>
+<div class="highlight-python"><pre>SUBSYSTEM=="usb", ATTR{idVendor}=="19d2", MODE="0666", GROUP="plugdev"
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", MODE="0666", GROUP="plugdev"</pre>
+</div>
+<p>save and exit. Now restart udev services by</p>
+<div class="highlight-python"><pre>sudo service udev restart</pre>
+</div>
+<p>That&#8217;s all, now enjoy debugging in eclipse or through adb without the need of
+root access.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="getting-connected-using-wifi-and-usb-cable">
+<h2>Getting connected using WiFi, and USB cable<a class="headerlink" href="#getting-connected-using-wifi-and-usb-cable" title="Permalink to this headline">¶</a></h2>
+<p>If your project demands a WiFi based debugging then follow this approach. First
+ensure that both your host machine and android device are in same WiFi network.</p>
+<p>Connect android(Aakash), and host-machine through USB cable. Wait for
+debugging icon on android side, when ready issue</p>
+<div class="highlight-python"><pre>adb tcpip 5555</pre>
+</div>
+<p>You will get confirmation message as <cite>restarting in TCP mode port: 5555</cite> on the
+terminal emulator. Now remove your USB cable, and issue</p>
+<div class="highlight-python"><pre>adb connect &lt;your-android-device-ip&gt;</pre>
+</div>
+<p>If success, it will print <cite>connected</cite> on your terminal.</p>
+<p>Now you can debug your android through adb or test apk&#8217;s through eclipse
+debugging wirelessly.</p>
+<p>When done, it&#8217;s better to disconnect gracefully</p>
+<div class="highlight-python"><pre>adb disconnect &lt;your-android-device-ip&gt;</pre>
+</div>
+</div>
+<div class="section" id="adb-options">
+<h2>adb options<a class="headerlink" href="#adb-options" title="Permalink to this headline">¶</a></h2>
+<p><strong>adb</strong> stands for <strong>android debug bridge</strong>. It&#8217;s a client command line tool
+which lets you communicate with an emulator instance or connected Android
+device.</p>
+<div class="section" id="adb-push-pull">
+<h3>adb push/pull<a class="headerlink" href="#adb-push-pull" title="Permalink to this headline">¶</a></h3>
+<p>These are most frequently used adb commands. Let&#8217;s try them.</p>
+<p>Assuming the device is connected to host-machine</p>
+<div class="highlight-python"><pre>adb push README.rst /mnt/sdcard</pre>
+</div>
+<p>This will copy README.rst to /mnt/sdcard, internal sdcard of Aakash tablet.</p>
+<blockquote>
+<div><p>Let&#8217;s try copying from device to our host-machine</p>
+<div class="highlight-python"><pre>adb pull /mnt/sdcard/README.rst /tmp</pre>
+</div>
+</div></blockquote>
+<p>This will copy README.rst to <cite>/tmp</cite> directory.</p>
+<p>Let&#8217;s try pushing a directory to android</p>
+<div class="highlight-python"><pre>adb push data /mnt/sdcard/data</pre>
+</div>
+<p>This will copy the content of <cite>data</cite> directory to <cite>data</cite> directory in sdcard.</p>
+<p>Similarly you can try pulling this directory to <cite>/tmp</cite></p>
+<div class="highlight-python"><pre>adb pull /mnt/sdcard/data /tmp/data</pre>
+</div>
+</div>
+<div class="section" id="adb-backup-restore">
+<h3>adb backup/restore<a class="headerlink" href="#adb-backup-restore" title="Permalink to this headline">¶</a></h3>
+<p>These are useful tools. Option <cite>-all</cite> will backup all apps</p>
+<div class="highlight-python"><pre>adb backup -all -f /tmp/backup.ab</pre>
+</div>
+<p>Now unlock your android device, and select &#8220;Backup up my data&#8221;. You can optionally
+set a password too.</p>
+<a class="reference internal image-reference" href="_images/adb-backup-phone.png"><img alt="_images/adb-backup-phone.png" src="_images/adb-backup-phone.png" style="width: 312.0px; height: 624.0px;" /></a>
+<p>After confirming operation on android device, your terminal emulator will change to</p>
+<img alt="_images/adb-backup.png" src="_images/adb-backup.png" style="width: 100%;" />
+<p>The backup operation sadly doesn&#8217;t have any progress bar, it take time depending
+on number of apps installed.</p>
+<p>Similarly, to restore one can do</p>
+<div class="highlight-python"><pre>adb restore /tmp/backup.ab</pre>
+</div>
+<p>This will again ask for confirmation on android side,
+select &#8220;Restore my data&#8221; to start restore process. Again no progress bar.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">backup and restore doesn&#8217;t work with Aakash device. There are many other tools
+freely available for same purpose.</p>
+</div>
+</div>
+<div class="section" id="adb-shell">
+<h3>adb shell<a class="headerlink" href="#adb-shell" title="Permalink to this headline">¶</a></h3>
+<p>This is again a most frequently used command. One can use &#8220;adb shell&#8221; to execute
+any shell command inside android environment</p>
+<div class="highlight-python"><pre>adb shell &lt;command&gt;</pre>
+</div>
+<p>We will see more of &#8220;adb shell&#8221; later.</p>
+</div>
+<div class="section" id="adb-logcat">
+<h3>adb logcat<a class="headerlink" href="#adb-logcat" title="Permalink to this headline">¶</a></h3>
+<p>This will simply show live log of all processes running on device. The <cite>-d</cite>
+flag will dump the output to stdout and exit. Let&#8217;s try this out</p>
+<div class="highlight-python"><pre>adb logcat -d | grep README.rst</pre>
+</div>
+<p><cite>grep</cite> will search for &#8216;README.rst&#8217; in logcat output.</p>
+<img alt="_images/adb-logcat.png" src="_images/adb-logcat.png" style="width: 100%;" />
+<p>Try searching other terms in logcat for effective debugging or you can run
+logcat to view live status of your android device.</p>
+</div>
+</div>
+<div class="section" id="package-manager-pm">
+<h2>package manager(pm)<a class="headerlink" href="#package-manager-pm" title="Permalink to this headline">¶</a></h2>
+<p>(pm) tool perform actions and queries on application packages installed on
+the device. Syntax to use</p>
+<div class="highlight-python"><pre>adb shell pm &lt;command&gt;</pre>
+</div>
+<p>Let&#8217;s try few command to retrieve package information</p>
+<div class="highlight-python"><pre>adb shell pm list packages</pre>
+</div>
+<img alt="_images/adb-shell-pm-list-package.png" src="_images/adb-shell-pm-list-package.png" style="width: 100%;" />
+<p>If you want to uninstall any package, simply issue</p>
+<div class="highlight-python"><pre>adb shell pm uninstall com.aakash.lab</pre>
+</div>
+<p>To set install location for apk&#8217;s, internal or external sdcard</p>
+<div class="highlight-python"><pre>adb shell pm set-install-location 1</pre>
+</div>
+<p>0: Auto—Let system decide the best location</p>
+<p>1: internal device storage</p>
+<p>2: external media</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>To get current install location</p>
+<div class="highlight-python"><pre>adb shell pm get-install-location</pre>
+</div>
+<img alt="_images/get-install-location.png" src="_images/get-install-location.png" style="width: 100%;" />
+</div>
+<div class="section" id="activity-manager-am">
+<h2>activity manager(am)<a class="headerlink" href="#activity-manager-am" title="Permalink to this headline">¶</a></h2>
+<p>Within an adb shell, one can issue commands with the activity manager (am)
+tool to perform various system actions, such as start an activity,
+force-stop a process etc.</p>
+<p>Let&#8217;s checkout few examples</p>
+<div class="highlight-python"><pre>adb shell am start -a android.intent.action.VIEW</pre>
+</div>
+<p>This will open &#8220;Complete action using&#8221; menu.</p>
+<p>Similarly, if one want to <strong>kill all background apps</strong>, then issue</p>
+<div class="highlight-python"><pre>adb shell am kill-all</pre>
+</div>
+<p>To test various screen resolutions for your application</p>
+<div class="highlight-python"><pre>adb shell am display-size 320x240</pre>
+</div>
+<p>Remember, you can not test your app in resolution higher than actual screen
+resolution.</p>
+<p>For eg: on Aakash the native screen resolution is 800x480 so one can&#8217;t test
+apps for 1280x800.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This option(display-size) may crash your display, you then may
+have to factory reset your device. Works with phone, crashes
+sometimes with Aakash. So use it wisely. You have been warned.</p>
+</div>
+<p>By the way, to do factory reset, goto settings -&gt; Backup and reset -&gt; Factory data reset
+and confirm. This will remove all the apps.</p>
+</div>
+<div class="section" id="automating-tasks">
+<h2>Automating tasks<a class="headerlink" href="#automating-tasks" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="automating-tasks-on-android-side">
+<h3>Automating tasks on android side<a class="headerlink" href="#automating-tasks-on-android-side" title="Permalink to this headline">¶</a></h3>
+<p>For various reasons you may want your certain script to start automatically when device boots. This
+can be achieved by carefully observing <cite>init.rc</cite> file.</p>
+<p>In case of aakash, to run a bash script at boot time we need to put the entry
+of the bash script in <strong>/system/bin/preinstall.sh</strong>, this file get called at
+boot time and anything inside it will be executed.</p>
+<p>Explore init.rc and preinstall.sh only if you know what you are doing. Any wrong
+entry in <strong>/system/bin/preinstall.sh</strong> may kill your device.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Again, you have been warned.</p>
+</div>
+</div>
+<div class="section" id="automating-tasks-on-host-side">
+<h3>Automating tasks on host side<a class="headerlink" href="#automating-tasks-on-host-side" title="Permalink to this headline">¶</a></h3>
+<p>With <strong>adb</strong> , one can easily script, for eg:</p>
+<p>To monitor RAM usage of Android device every 1 sec,
+one can write a simple shell script and execute</p>
+<div class="highlight-bash"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/sh</span>
+
+<span class="k">while </span><span class="nb">true</span>
+<span class="k">do</span>
+<span class="k">   </span>adb shell busybox free -m
+   sleep 1
+<span class="k">done</span>
+</pre></div>
+</td></tr></table></div>
+<p>The above script can be done in one line too, in terminal emulator</p>
+<div class="highlight-python"><pre>while true; do adb shell busybox free -m ; sleep 1; done</pre>
+</div>
+<p>To cancel the loop, just use ^C .</p>
+<p>Let&#8217;s try another script. This time let&#8217;s try installing all the apks present
+in present working directory</p>
+<div class="highlight-python"><pre>for each in $(ls *.apk); do adb install -r $each; done</pre>
+</div>
+<p>These are very trivial examples, there are lot of exciting things possible with
+scripts.</p>
+</div>
+</div>
+<div class="section" id="using-busybox">
+<h2>Using busybox<a class="headerlink" href="#using-busybox" title="Permalink to this headline">¶</a></h2>
+<p>BusyBox provides several stripped-down Unix tools in a single executable file
+(less than 1 MB). It is used in almost every embedded Linux device.</p>
+<p>Inside <cite>adb shell</cite> (i.e in android device) it can be accessed as</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">busybox</span>
+</pre></div>
+</div>
+<p>This will print list of commands possible with busybox. Busybox can also be
+accessed from terminal as</p>
+<div class="highlight-python"><pre>adb shell busybox</pre>
+</div>
+<p>To access any command use</p>
+<div class="highlight-python"><pre>adb shell busybox &lt;command-name&gt; &lt;command's-flag&gt;</pre>
+</div>
+<p>We will see few important examples with busybox</p>
+<p>Listing all files</p>
+<div class="highlight-python"><pre>busybox ls -l</pre>
+</div>
+<img alt="_images/busybox-ls-l.png" src="_images/busybox-ls-l.png" style="width: 100%;" />
+<p>Changing file permissions</p>
+<div class="highlight-python"><pre>adb shell busybox chmod 755 /mnt/sdcard</pre>
+</div>
+<p>For opening a file for editing, it&#8217;s better to do <strong>adb shell</strong> first and then:</p>
+<div class="highlight-python"><pre>busybox vi /mnt/sdcard/README.rst</pre>
+</div>
+<p>Use <strong>i</strong> or press &lt;INSERT&gt; key to go to editing mode.</p>
+<p>To save, press &lt;ESC&gt; key to exit from editing mode. Then use <strong>:wq</strong> to write and quit.</p>
+<p>If you have edited a file but want to discard changes, press &lt;ESC&gt; to
+exit from editing mode, and then use <strong>:q!</strong> to quit without saving.</p>
+<p>To know system load</p>
+<div class="highlight-python"><pre>adb shell busybox top</pre>
+</div>
+<img alt="_images/busybox-top.png" src="_images/busybox-top.png" style="width: 100%;" />
+<p>To find out partition table</p>
+<div class="highlight-python"><pre>adb shell busybox df -h</pre>
+</div>
+<p>To find out disk usage of any file</p>
+<div class="highlight-python"><pre>adb shell busybox du -sh</pre>
+</div>
+<p>To know list of mounted devices</p>
+<div class="highlight-python"><pre>adb shell mount</pre>
+</div>
+<p>In most of the android devices <strong>/system</strong> is marked
+as <cite>ro</cite>, only when you get <strong>root</strong> access to your device you can make changes
+there. But it make sense to mark system partition as <cite>ro</cite> unless required. To
+change our mount options to <cite>ro</cite></p>
+<div class="highlight-python"><pre>adb shell busybox mount -o rw,remount  /system</pre>
+</div>
+</div>
+<div class="section" id="practical-example">
+<h2>Practical example<a class="headerlink" href="#practical-example" title="Permalink to this headline">¶</a></h2>
+<p>This we use at our Aakash logistics facility, to obtain MAC address from a new
+device automatically we use this approach in a Python script:</p>
+<div class="highlight-python"><pre>adb shell svc wifi enable</pre>
+</div>
+<p>then</p>
+<div class="highlight-python"><pre>adb shell ip link show wlan0 | busybox awk '/ether/ {print $2}'</pre>
+</div>
+<p>finally disable wifi, if not required</p>
+<div class="highlight-python"><pre>adb shell svc wifi disable</pre>
+</div>
+</div>
+<div class="section" id="monitor-android">
+<h2>Monitor android<a class="headerlink" href="#monitor-android" title="Permalink to this headline">¶</a></h2>
+<p><strong>Monitor</strong> is a gui tool to monitor packages, apps, threads, processes etc.
+One can use it to capture screenshot too.</p>
+</div>
+<div class="section" id="suggested-readings">
+<h2>Suggested readings<a class="headerlink" href="#suggested-readings" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://developer.android.com/index.html">http://developer.android.com/index.html</a></li>
+<li><a class="reference external" href="http://developer.android.com/tools/help/adb.html">http://developer.android.com/tools/help/adb.html</a></li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><div class="sphinxlocaltoc">
+    <h3><a href="index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Advanced Android Debugging</a><ul>
+<li><a class="reference internal" href="#debugging">Debugging</a></li>
+<li><a class="reference internal" href="#installing-adb-and-setting-debugging-environment">Installing adb, and setting debugging environment</a><ul>
+<li><a class="reference internal" href="#setting-udev-rules-for-adb-to-run-as-a-normal-user">Setting udev rules for adb to run as a normal user</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#getting-connected-using-wifi-and-usb-cable">Getting connected using WiFi, and USB cable</a></li>
+<li><a class="reference internal" href="#adb-options">adb options</a><ul>
+<li><a class="reference internal" href="#adb-push-pull">adb push/pull</a></li>
+<li><a class="reference internal" href="#adb-backup-restore">adb backup/restore</a></li>
+<li><a class="reference internal" href="#adb-shell">adb shell</a></li>
+<li><a class="reference internal" href="#adb-logcat">adb logcat</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#package-manager-pm">package manager(pm)</a></li>
+<li><a class="reference internal" href="#activity-manager-am">activity manager(am)</a></li>
+<li><a class="reference internal" href="#automating-tasks">Automating tasks</a><ul>
+<li><a class="reference internal" href="#automating-tasks-on-android-side">Automating tasks on android side</a></li>
+<li><a class="reference internal" href="#automating-tasks-on-host-side">Automating tasks on host side</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#using-busybox">Using busybox</a></li>
+<li><a class="reference internal" href="#practical-example">Practical example</a></li>
+<li><a class="reference internal" href="#monitor-android">Monitor android</a></li>
+<li><a class="reference internal" href="#suggested-readings">Suggested readings</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="index.html"
+                          title="Previous page">&larr; Advanced Android Debugging</a></p>
+  </div>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/advanced-android-debugging.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Advanced Android Debugging"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">The Linux Academy 1.0 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2014, Srikant Patnaik.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

@@ -1,0 +1,171 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Embedded Linux &mdash; The Linux Academy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="_static/cloud.js"></script>
+    <link rel="top" title="The Linux Academy 1.0 documentation" href="#" />
+    <link rel="next" title="Embedded Linux &amp; Open hardware" href="embedded-linux.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="relbar-top">
+        
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="embedded-linux.html" title="Embedded Linux &amp; Open hardware"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+    <li><a href="#">The Linux Academy 1.0 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="embedded-linux">
+<h1>Embedded Linux<a class="headerlink" href="#embedded-linux" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="embedded-linux.html">Embedded Linux &amp; Open hardware</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="embedded-linux.html#embedded-linux-el">Embedded Linux(EL)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="embedded-linux.html#what-is-embedded-linux">What is Embedded Linux ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="embedded-linux.html#why-embedded-linux">Why Embedded Linux ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="embedded-linux.html#arm-based-embedded-linux">ARM based Embedded Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="embedded-linux.html#boot-sequence-in-linux">Boot sequence in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="embedded-linux.html#setting-up-development-environment">Setting up development environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="embedded-linux.html#software-requirements">Software requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="embedded-linux.html#hardware-requirements">Hardware requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="embedded-linux.html#preparing-u-boot-kernel-filesystem">Preparing U-boot, kernel &amp; filesystem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="embedded-linux.html#id1">U-Boot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="embedded-linux.html#compiling-u-boot">Compiling U-boot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="embedded-linux.html#writing-u-boot-on-sdcard">Writing U-boot on sdcard</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="embedded-linux.html#kernel">Kernel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="embedded-linux.html#compiling-kernel">Compiling Kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="embedded-linux.html#copying-kernel-to-sdcard">Copying kernel to sdcard</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="embedded-linux.html#filesystem">Filesystem</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="embedded-linux.html#setting-up-arm-chroot">Setting up ARM chroot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="embedded-linux.html#updating-and-installing-packages">Updating and installing packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="embedded-linux.html#user-permissions-and-startup-jobs">User permissions and startup jobs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="embedded-linux.html#debugging">Debugging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="embedded-linux.html#u-boot-access-using-minicom">U-boot access using minicom</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="embedded-linux.html#minicom-setup">Minicom setup</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="embedded-linux.html#kernel-debugging">Kernel debugging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="embedded-linux.html#additional-tools-to-make-life-easy">Additional tools to make life easy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="embedded-linux.html#ssh-scp">ssh &amp; scp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="embedded-linux.html#tftp-server">tftp server</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="embedded-linux.html"
+                          title="Next page">&rarr; Embedded Linux &amp; Open hardware</a></p>
+  </div>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="embedded-linux.html" title="Embedded Linux &amp; Open hardware"
+             >next</a> &nbsp; &nbsp;</li>
+    <li><a href="#">The Linux Academy 1.0 documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2014, Srikant Patnaik.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
