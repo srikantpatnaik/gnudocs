@@ -77,4 +77,6 @@
 # xindy
 *.xdy
 
+# cached files
+.doctrees/*
 

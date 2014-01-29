@@ -251,7 +251,7 @@ epub_title = u'Embedded Linux'
 epub_author = u'Srikant Patnaik'
 epub_publisher = u'TheLinuxAcademy.in'
 epub_copyright = u'2014, Srikant Patnaik'
-
+epub_basename = 'Embedded_Linux'
 # The language of the text. It defaults to the language option
 # or en if the language is not set.
 #epub_language = ''
