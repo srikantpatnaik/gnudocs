@@ -247,7 +247,7 @@ texinfo_documents = [
 # -- Options for Epub output ---------------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = u'Embedded Linux'
+epub_title = u'The GNU/Linux'
 epub_author = u'Srikant Patnaik'
 epub_publisher = u'TheLinuxAcademy.in'
 epub_copyright = u'2014, Srikant Patnaik'

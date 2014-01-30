@@ -1,6 +1,6 @@
-=========
-The Linux
-=========
+==============
+The GNU/Linux
+==============
 
 
 Introduction to GNU/Linux
