@@ -41,7 +41,7 @@ help:
 
 clean:
 #	-rm -rf $(BUILDDIR)/*
-	-rm -rf $(BUILDDIR)/html $(BUILDDIR)/latex $(BUILDDIR)/epub $(BUILDDIR)/text
+	-rm -rf $(BUILDDIR)/html $(BUILDDIR)/latex $(BUILDDIR)/epub
 
 
 html:

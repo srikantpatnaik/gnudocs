@@ -1,0 +1,31 @@
+
+Embedded Linux
+**************
+
+* Embedded Linux & Open hardware
+  * Embedded Linux(EL)
+    * What is Embedded Linux ?
+    * Why Embedded Linux ?
+    * ARM based Embedded Linux
+  * Boot sequence in Linux
+  * Setting up development environment
+    * Software requirements
+    * Hardware requirements
+  * Preparing U-boot, kernel & filesystem
+    * U-Boot
+      * Compiling U-boot
+      * Writing U-boot on sdcard
+    * Kernel
+      * Compiling Kernel
+      * Copying kernel to sdcard
+    * Filesystem
+      * Setting up ARM chroot
+      * Updating and installing packages
+      * User permissions and startup jobs
+  * Debugging
+    * U-boot access using minicom
+      * Minicom setup
+    * Kernel debugging
+  * Additional tools to make life easy
+    * ssh & scp
+    * tftp server
