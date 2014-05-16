@@ -3,14 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-The GNU/Linux 
-==============
+Basic Linux commandline applications
+====================================
 
 .. comment: Srikant: changed maxdepth to 0 from 2, remove Indices and tables
 
 .. toctree::
    :maxdepth: 0
 
-   the_linux
+   basic_linux_commandline_applications
 
 

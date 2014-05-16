@@ -12,5 +12,3 @@ Advanced Android Debugging
    :maxdepth: 0
 
    advanced-android-debugging
-
-
