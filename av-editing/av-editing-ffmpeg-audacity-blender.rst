@@ -108,6 +108,7 @@ Size reduction by scaling down ::
 
 	ffmpeg -i sample-video.mp4 -c:a copy -vf scale=640:360 reduced_scale.mp4
 
+
 Joining media files
 ~~~~~~~~~~~~~~~~~~~
 
@@ -204,6 +205,13 @@ It is again a straight forward step ::
 
 	ffmpeg -i sample-video.mp4 -af "volume=enable='between(t,1,3)':volume=0 mute-1-3s.mp4
 
+Some more examples
+~~~~~~~~~~~~~~~~~~
+
+Applying multiple filters. Here we are muting audio from 0 to 2 seconds, cropping 160px from top and bottom\ 
+and selecting the length of the video ::
+
+    ffmpeg -i sample-video.mkv -af "volume=enable='between(t,0,2)':volume=0" -vf "crop=in_w-2:in_h-2*160" -ss 00:00:00.00 -t 00:02:22.00 edited.mp4
 
 SOX and FFmpeg
 --------------
